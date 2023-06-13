@@ -53,6 +53,11 @@ header {
   text-transform: uppercase;
 }
 
+.header.block .nav-brand a:hover {
+  color: var(--quartz);
+  text-decoration: none;
+}
+
 .header.block .nav-hamburger {
   display: flex;
   grid-area: hamburger;
@@ -111,6 +116,7 @@ header {
   padding: 15px 0;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .header.block .nav-sections > ul > li > a {
   display: flex;
   font-weight: var(--font-weight-semibold);
@@ -155,6 +161,7 @@ header {
   padding: 12px 0;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .header.block .nav-sections > ul > li > ul > li > a {
   display: flex;
   align-items: center;

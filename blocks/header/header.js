@@ -98,7 +98,7 @@ function buildLogo() {
 function buildBrand() {
   const brand = document.createElement('div');
   brand.classList.add('nav-brand');
-  brand.innerHTML = "<div>Takeda's Integrated Health Systems Team</div>";
+  brand.innerHTML = '<a href="/" rel="noopener"><div>Takeda\'s Integrated Health Systems Team</div></a>';
   return brand;
 }
 
