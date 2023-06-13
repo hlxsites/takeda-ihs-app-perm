@@ -71,8 +71,9 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Event} e
  */
 function toggleExpanded(e) {
-  const expanded = e.currentTarget.getAttribute('aria-expanded') === 'true';
-  e.currentTarget.setAttribute('aria-expanded', !expanded);
+  const expandable = e.currentTarget.closest('[aria-expanded]');
+  const expanded = expandable.getAttribute('aria-expanded') === 'true';
+  expandable.setAttribute('aria-expanded', !expanded);
 }
 
 /**
@@ -135,8 +136,9 @@ function buildSections(sections) {
       anchor.append(expander.cloneNode());
       section.classList.add('nav-drop');
       section.setAttribute('aria-expanded', 'false');
-      section.setAttribute('tabindex', '0');
-      section.setAttribute('role', 'button');
+
+      anchor.setAttribute('tabindex', '0');
+      anchor.setAttribute('role', 'button');
       anchor.addEventListener('click', (e) => {
         const expanded = section.getAttribute('aria-expanded') === 'true';
         if (e.currentTarget !== e.target || !isDesktop.matches) {
@@ -148,8 +150,8 @@ function buildSections(sections) {
       });
       // enable nav dropdown keyboard accessibility
       anchor.addEventListener('keydown', openOnKeydown);
-      section.addEventListener('mouseenter', toggleExpanded);
-      section.addEventListener('mouseleave', toggleExpanded);
+      anchor.addEventListener('mouseenter', toggleExpanded);
+      anchor.addEventListener('mouseleave', toggleExpanded);
     }
     if (section.querySelector('hr')) {
       section.classList.add('separator');
