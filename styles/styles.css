@@ -36,6 +36,9 @@
   --body-font-size-l: 24px;
   --body-font-size-xl: 32px;
 
+  /** Header **/
+  --header-font-size-m: 24px;
+
   /** Nav Height **/
   --nav-height: 100px;
 
