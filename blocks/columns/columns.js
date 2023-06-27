@@ -1,6 +1,6 @@
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 
-export default function decorate(block) {
+export default async function decorate(block) {
   block.classList.add(`columns-${block.children.length}-cols`);
 
   // setup image columns
@@ -15,5 +15,5 @@ export default function decorate(block) {
     row.replaceChildren(content);
   });
 
-  decorateIcons(block);
+  await decorateIcons(block);
 }
