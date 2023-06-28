@@ -33,6 +33,11 @@
   --body-font-size-xs: 12px;
   --body-font-size-s: 14px;
   --body-font-size-m: 16px;
+  --body-font-size-l: 24px;
+  --body-font-size-xl: 32px;
+
+  /** Header **/
+  --header-font-size-m: 24px;
 
   /** Nav Height **/
   --nav-height: 100px;
@@ -65,6 +70,7 @@ body.appear {
 header {
   height: var(--nav-height);
 }
+
 
 @media screen and (max-width: 299px) {
   :root {
