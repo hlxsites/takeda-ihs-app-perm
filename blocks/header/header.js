@@ -87,7 +87,7 @@ function buildLogo() {
 function buildBrand() {
   const brand = document.createElement('div');
   brand.classList.add('nav-brand');
-  brand.innerHTML = '<a href="/" rel="noopener"><div>Takeda\'s Integrated Health Systems Team</div></a>';
+  brand.innerHTML = '<a href="/" rel="noopener">Takeda\'s Integrated Health Systems Team</a>';
   return brand;
 }
 
@@ -160,7 +160,16 @@ function buildSections(sections) {
           }
         }
       });
-
+      section.addEventListener('pointerleave', (e) => {
+        if (e.pointerType === 'mouse') {
+          toggleAllNavSections(sections);
+          section.setAttribute('aria-expanded', 'false');
+          const all = section.querySelector('.show-all');
+          if (all) {
+            all.classList.remove('hide');
+          }
+        }
+      });
       // enable nav dropdown keyboard accessibility
       anchor.addEventListener('keydown', openOnKeydown);
     }

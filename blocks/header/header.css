@@ -16,7 +16,7 @@ header {
     / min-content 1fr min-content;
   justify-content: space-between;
   background-color: transparent;
-  z-index: 1000;
+  box-shadow: 2px 2px 10px 1px rgba(0 0 0 / 15%);
 }
 
 .header.block nav[aria-expanded="true"] {
@@ -68,7 +68,6 @@ header {
 .header.block .nav-hamburger .nav-hamburger-icon {
   display: block;
   margin: 0 15px;
-  border: none;
   background-color: transparent;
 }
 
@@ -83,10 +82,14 @@ header {
   display: none;
 }
 
-.header.block .nav-hamburger .icon svg {
-  display: block;
+.header.block .nav-hamburger .icon {
   height: 25px;
   width: 25px;
+}
+
+.header.block .nav-hamburger .icon svg {
+  height: 100%;
+  width: 100%;
 }
 
 .header.block .nav-sections {
@@ -230,8 +233,9 @@ header {
 
 @media screen and (min-width: 600px) {
   .header.block nav {
+    overflow-y: visible;
     grid-template:
-    'utility utility utility' min-content
+    'utility utility utility' 50px
     'logo brand hamburger' 75px
     'sections sections sections' min-content
     / min-content 1fr min-content;
@@ -242,7 +246,7 @@ header {
     justify-content: flex-start;
   }
 
-  .header.block .nav-hamburger .nav-hamburger-icon svg {
+  .header.block .nav-hamburger .nav-hamburger-icon .icon {
     height: 35px;
     width: 35px;
   }
@@ -280,6 +284,10 @@ header {
 }
 
 @media screen and (min-width: 900px) {
+  .header.block nav[aria-expanded="true"] {
+    height: var(--nav-height);
+  }
+
   .header.block nav {
     grid-template:
     'utility utility utility' 50px
