@@ -1,18 +1,53 @@
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
-export default function decorate(block) {
-  /* change to ul, li */
-  const ul = document.createElement('ul');
-  [...block.children].forEach((row) => {
-    const li = document.createElement('li');
-    li.innerHTML = row.innerHTML;
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else div.className = 'cards-card-body';
+/**
+ * Builds the Icons variation of the cards block.
+ * @param {HTMLDivElement} block
+ */
+function buildIconCards(block) {
+  [...block.children].forEach((card) => {
+    card.classList.add('card');
+    [...card.children].forEach((body) => {
+      const anchor = body.querySelector('a');
+
+      const content = document.createElement('a');
+      content.classList.add('card-content');
+      content.href = anchor.href;
+      content.title = anchor.title;
+
+      // Pull out the icon
+      const icon = body.querySelector('span.icon');
+      if (icon) {
+        const tmp = icon.parentElement;
+        const iconWrapper = document.createElement('div');
+        iconWrapper.classList.add('card-icon');
+        iconWrapper.append(icon);
+        tmp.remove();
+        content.append(iconWrapper);
+      } else {
+        card.classList.add('no-icon');
+      }
+
+      const link = document.createElement('div');
+      link.classList.add('card-link');
+      link.innerHTML = `<span>${anchor.textContent}</span>`;
+
+      body.classList.add('card-body');
+
+      const tmp = anchor.parentElement;
+      tmp.remove();
+
+      content.append(body);
+      card.append(content, link);
     });
-    ul.append(li);
   });
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
-  block.textContent = '';
-  block.append(ul);
+}
+
+export default async function decorate(block) {
+  if (block.classList.contains('icons')) {
+    buildIconCards(block);
+    await decorateIcons(block);
+  } else {
+    block.innerHTML = '';
+  }
 }
